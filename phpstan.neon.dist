@@ -1,0 +1,11 @@
+parameters:
+	level: 8
+	paths:
+		- pricing-rules-for-woocommerce.php
+		- uninstall.php
+		- src
+		- eval
+	treatPhpDocTypesAsCertain: false
+	bootstrapFiles:
+		- tests/phpstan-constants.php
+		- vendor/php-stubs/woocommerce-stubs/woocommerce-stubs.php

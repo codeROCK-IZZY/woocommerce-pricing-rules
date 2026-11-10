@@ -1,0 +1,50 @@
+# Local WordPress with the plugin mounted and a WP-CLI container; the test script installs WooCommerce.
+#   docker compose up -d && bash tests/integration/run.sh   (WP_IMAGE=wordpress:6.5-php8.3-apache to test the oldest supported version)
+# Then open http://127.0.0.1:8080 (admin / admin).
+services:
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 3s
+      retries: 30
+
+  wordpress:
+    image: ${WP_IMAGE:-wordpress:php8.3-apache}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DEBUG: "1"
+    volumes:
+      - wp:/var/www/html
+      - ./:/var/www/html/wp-content/plugins/pricing-rules-for-woocommerce
+
+  cli:
+    image: wordpress:cli-php8.3
+    user: "33:33"
+    depends_on:
+      - wordpress
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp:/var/www/html
+      - ./:/var/www/html/wp-content/plugins/pricing-rules-for-woocommerce
+    entrypoint: ["sleep", "infinity"]
+
+volumes:
+  wp:

@@ -1,0 +1,8 @@
+/* Pricing Rules for WooCommerce: inherits the theme's colours; sets layout only. */
+.wcpr-tiers { width: 100%; max-width: 28rem; margin: 1.25rem 0 0.5rem; border-collapse: collapse; font-size: 0.95em; }
+.wcpr-tiers caption { text-align: left; font-weight: 600; padding-bottom: 0.4rem; }
+.wcpr-tiers th, .wcpr-tiers td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid rgba(127, 127, 127, 0.3); }
+.wcpr-tiers thead th { font-weight: 600; }
+.wcpr-note { font-size: 0.85em; opacity: 0.8; }
+.wcpr-savings th, .wcpr-savings td { color: #15803d; font-weight: 600; }
+td.product-price del, .cart_item del { opacity: 0.6; margin-right: 0.25em; }

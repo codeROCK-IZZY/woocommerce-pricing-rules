@@ -1,0 +1,106 @@
+{
+    "cases": 20000,
+    "mismatches": 0,
+    "mutants": {
+        "round down instead of half up": true,
+        "BOGO discounts the dearest unit": true,
+        "BOGO ignores the group limit": true,
+        "floor not enforced": true,
+        "exclusive does not lock": true,
+        "cart leftover cents dropped": true,
+        "cart threshold uses >": true,
+        "bulk counts all lines together": true,
+        "priority order reversed": true,
+        "rule end date inclusive": true
+    },
+    "invariants": {
+        "below floor or negative": 0,
+        "lines do not sum": 0,
+        "rules do not sum": 0
+    },
+    "discounted": 15086,
+    "drift": {
+        "cases": 5000,
+        "naive": 1449,
+        "naive_worst": 2,
+        "ours": 0
+    },
+    "stacking": {
+        "cases": 5000,
+        "naive": 2457,
+        "ours": 0
+    },
+    "speed": [
+        {
+            "cart": "5 lines × 3",
+            "units": 15,
+            "p50": 0.124,
+            "p95": 0.166,
+            "ref_p50": 0.21
+        },
+        {
+            "cart": "20 lines × 10",
+            "units": 200,
+            "p50": 0.436,
+            "p95": 0.532,
+            "ref_p50": 2.92
+        },
+        {
+            "cart": "50 lines × 1000",
+            "units": 50000,
+            "p50": 1.566,
+            "p95": 2.58,
+            "ref_p50": 1845.59
+        }
+    ],
+    "checks": [
+        {
+            "check": "Carts where the engine differs from the independent reference",
+            "value": "0 \/ 20000",
+            "target": "= 0",
+            "pass": true
+        },
+        {
+            "check": "Planted bugs caught by that comparison",
+            "value": "10 \/ 10",
+            "target": "= all",
+            "pass": true
+        },
+        {
+            "check": "Items priced below their floor or below zero",
+            "value": 0,
+            "target": "= 0",
+            "pass": true
+        },
+        {
+            "check": "Carts whose lines do not add up to the total",
+            "value": 0,
+            "target": "= 0",
+            "pass": true
+        },
+        {
+            "check": "Carts whose per-rule savings do not add up",
+            "value": 0,
+            "target": "= 0",
+            "pass": true
+        },
+        {
+            "check": "Cart discounts off by a cent or more",
+            "value": "0 \/ 5000",
+            "target": "= 0",
+            "pass": true
+        },
+        {
+            "check": "Negative prices from stacked percentages",
+            "value": "0 \/ 5000",
+            "target": "= 0",
+            "pass": true
+        },
+        {
+            "check": "p95 time, 50 lines × 1,000 units, 20 rules",
+            "value": "2.58 ms",
+            "target": "≤ 25 ms",
+            "pass": true
+        }
+    ]
+}

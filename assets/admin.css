@@ -1,0 +1,12 @@
+.wcpr-editor .form-table th { width: 220px; }
+.wcpr-editor [hidden] { display: none !important; }
+.wcpr-tier-rows { border-collapse: collapse; margin-bottom: 8px; }
+.wcpr-tier-rows th { width: auto; padding: 4px 12px 4px 0; font-weight: 600; }
+.wcpr-tier-rows td { padding: 4px 12px 4px 0; }
+.wcpr-tier-rows input { width: 110px; }
+.wcpr-role { display: inline-block; margin: 0 14px 6px 0; }
+.wcpr-chip { display: inline-block; padding: 1px 8px; border-radius: 10px; background: #f0f0f1; font-size: 12px; }
+.wcpr-chip.is-on { background: #d1fae5; color: #065f46; }
+.wcpr-chip.is-off { background: #fee2e2; color: #991b1b; }
+.wcpr-invalid { color: #b91c1c; }
+.column-wcpr_priority { width: 80px; }

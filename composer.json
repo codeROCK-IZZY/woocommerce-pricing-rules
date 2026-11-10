@@ -1,0 +1,45 @@
+{
+	"name": "coderock-izzy/pricing-rules-for-woocommerce",
+	"description": "WooCommerce pricing rules, priced exactly to the cent.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"require": {
+		"php": ">=8.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^10.5",
+		"wp-coding-standards/wpcs": "^3.1",
+		"phpcompatibility/phpcompatibility-wp": "^2.1",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"phpstan/phpstan": "^2.1",
+		"szepeviktor/phpstan-wordpress": "^2.0",
+		"php-stubs/woocommerce-stubs": "^9.0 || ^10.0",
+		"phpstan/extension-installer": "^1.4"
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"PricingRules\\": "src/",
+			"PricingRules\\Tests\\": "tests/unit/"
+		},
+		"classmap": [
+			"eval/ReferencePricer.php",
+			"eval/RandomCarts.php"
+		]
+	},
+	"scripts": {
+		"lint": "phpcs",
+		"analyse": "phpstan analyse --memory-limit=1G",
+		"test": "phpunit",
+		"eval": "php eval/run.php --gate"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true,
+			"phpstan/extension-installer": true
+		},
+		"platform": {
+			"php": "8.1.0"
+		},
+		"sort-packages": true
+	}
+}
